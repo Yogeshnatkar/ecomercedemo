@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SwiftCart Ecommerce Landing Page</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="SwiftCart home">
+      <span class="brand-mark">S</span>
+      <span>SwiftCart</span>
+    </a>
+
+    <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false">Menu</button>
+
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="#products">Products</a>
+      <a href="#deals">Deals</a>
+      <a href="#support">Support</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+      <label class="language-control">
+        <span>Language</span>
+        <select id="languageSelect" aria-label="Choose language">
+          <option value="en">English</option>
+          <option value="hi">Hindi</option>
+          <option value="ta">Tamil</option>
+        </select>
+      </label>
+      <button class="cart-button" type="button" id="openCart">Cart <span id="cartCount">0</span></button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home" aria-label="Shopping hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Fast delivery. Fresh deals. Secure checkout.</p>
+        <h1>SwiftCart</h1>
+        <p>Shop electronics, fashion, beauty, home essentials, and daily deals in one responsive storefront.</p>
+        <div class="hero-actions">
+          <a class="primary-link" href="#products">Shop Now</a>
+          <a class="secondary-link" href="#support">Need Help?</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="shop-layout" id="products">
+      <aside class="filters" aria-label="Product filters">
+        <div class="filter-head">
+          <h2>Filters</h2>
+          <button type="button" id="clearFilters">Clear</button>
+        </div>
+
+        <button class="filter-toggle" type="button" id="filterToggle" aria-expanded="false">Show Filters</button>
+
+        <div class="filter-content" id="filterContent">
+          <label class="search-field">
+            Search products
+            <input id="searchInput" type="search" placeholder="Headphones, sneakers...">
+          </label>
+
+          <fieldset>
+            <legend>Product Category</legend>
+            <div class="category-list" id="categoryList"></div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Price</legend>
+            <label><input type="radio" name="price" value="all" checked> <span>All prices</span></label>
+            <label><input type="radio" name="price" value="under50"> <span>Under $50</span></label>
+            <label><input type="radio" name="price" value="50to150"> <span>$50 to $150</span></label>
+            <label><input type="radio" name="price" value="over150"> <span>Over $150</span></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Minimum Rating</legend>
+            <label><input type="radio" name="rating" value="0" checked> <span>Any rating</span></label>
+            <label><input type="radio" name="rating" value="4"> <span>4 stars and up</span></label>
+            <label><input type="radio" name="rating" value="4.5"> <span>4.5 stars and up</span></label>
+          </fieldset>
+        </div>
+      </aside>
+
+      <section class="catalog" aria-label="Product catalog">
+        <div class="catalog-top">
+          <div>
+            <p class="section-kicker">Browse by category</p>
+            <h2 id="catalogTitle">Featured Products</h2>
+          </div>
+          <label class="sort-control">
+            Sort
+            <select id="sortSelect">
+              <option value="featured">Featured</option>
+              <option value="low">Price: Low to High</option>
+              <option value="high">Price: High to Low</option>
+              <option value="rating">Top Rated</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="related-searches" aria-label="Related searches">
+          <span>Related Search</span>
+          <button type="button" data-search="wireless">Wireless</button>
+          <button type="button" data-search="running">Running</button>
+          <button type="button" data-search="skincare">Skincare</button>
+          <button type="button" data-search="kitchen">Kitchen</button>
+        </div>
+
+        <div class="product-grid" id="productGrid"></div>
+      </section>
+    </section>
+
+    <section class="deal-strip" id="deals">
+      <div>
+        <p class="section-kicker">Today only</p>
+        <h2>Bundle deals on best sellers</h2>
+      </div>
+      <a class="primary-link small" href="#products">Explore Deals</a>
+    </section>
+  </main>
+
+  <button class="support-toggle" type="button" id="supportToggle" aria-controls="supportPanel" aria-expanded="false">Support Chat</button>
+  <section class="support-panel" id="supportPanel" aria-label="Support chat option" hidden>
+    <div class="support-head">
+      <strong>Support Chat</strong>
+      <button type="button" id="closeSupport" aria-label="Close support chat">Close</button>
+    </div>
+    <div class="chat-body" id="support">
+      <p class="chat-message agent">Hi, how can we help with your order today?</p>
+      <button type="button" data-chat="Track my order">Track my order</button>
+      <button type="button" data-chat="Payment issue">Payment issue</button>
+      <button type="button" data-chat="Return request">Return request</button>
+    </div>
+    <form class="chat-form" id="chatForm">
+      <input type="text" id="chatInput" placeholder="Type your message" aria-label="Support message">
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <a class="whatsapp-link" href="https://wa.me/15551234567?text=Hello%20SwiftCart%20support" target="_blank" rel="noopener">WhatsApp</a>
+
+  <dialog class="cart-modal" id="cartModal">
+    <div class="modal-head">
+      <h2>Your Cart</h2>
+      <button type="button" id="closeCart" aria-label="Close cart">Close</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-summary">
+      <span>Total</span>
+      <strong id="cartTotal">$0.00</strong>
+    </div>
+    <button class="checkout-button" type="button" id="checkoutButton">Checkout</button>
+
+    <form class="checkout-form" id="checkoutForm" hidden>
+      <h3>Payment Option</h3>
+      <label><input type="radio" name="payment" value="card" checked> Credit or debit card</label>
+      <label><input type="radio" name="payment" value="upi"> UPI</label>
+      <label><input type="radio" name="payment" value="wallet"> Wallet</label>
+      <label><input type="radio" name="payment" value="cod"> Cash on delivery</label>
+      <div class="payment-fields">
+        <input type="text" placeholder="Name on card" aria-label="Name on card">
+        <input type="text" placeholder="Card or UPI details" aria-label="Payment details">
+      </div>
+      <button class="pay-button" type="submit">Place Secure Order</button>
+      <p class="order-message" id="orderMessage" role="status"></p>
+    </form>
+  </dialog>
+
+  <footer class="site-footer" id="contact">
+    <div>
+      <a class="brand footer-brand" href="#home">
+        <span class="brand-mark">S</span>
+        <span>SwiftCart</span>
+      </a>
+      <p>Reliable ecommerce landing page with category shopping, filters, checkout, and support access.</p>
+    </div>
+    <address>
+      <strong>Contact Details</strong>
+      <span>Email: support@swiftcart.example</span>
+      <span>Phone: +1 555 123 4567</span>
+      <span>Address: 42 Market Street, New York, NY</span>
+    </address>
+    <div>
+      <strong>Support</strong>
+      <a href="#support">Live chat</a>
+      <a href="https://wa.me/15551234567?text=Hello%20SwiftCart%20support" target="_blank" rel="noopener">WhatsApp support</a>
+      <a href="mailto:support@swiftcart.example">Email support</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
